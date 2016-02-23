@@ -1,0 +1,61 @@
+<?xml version=”1.0” encoding=”UTF-8”?>
+  <CatalogRequest>
+     <CustomerAccess>
+       <CustomerID>1234567890</CustomerID>
+       <CustomerKey>XXXXXXXXXXXXXXXXXXXXXXXXXXXX</CustomerKey>
+     </CustomerAccess>
+     <Version>1.5</Version>
+     <Items>
+       <Item>
+          <Sku>111111111</Sku>
+          <ItemName>Short Sleeve Crewe</ItemName>
+          <DeclaredCustomsValue>34.99</DeclaredCustomsValue>
+          <CurrencyCode>USD</CurrencyCode>
+          <Category>Men/Shirts/Sport/Short Sleeve</Category>
+          <Color>Green</Color>
+          <Description>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed tempus
+          diam non pede. Vivamus porttitor dui ac est fringilla porttitor. In luctus iaculis
+          nunc. Praesent ac ligula. Cras rutrum cursus risus. Nunc tincidunt sapien dignissim
+          massa. Nam facilisis. Mauris sit amet nisl a ante porta faucibus...</Description>
+          <ShortDescription>Men’s Short Sleeve Crew T-Shirt</ShortDescription>
+          <Materials>Cotton,Polyester</Materials>
+          <Size>Large</Size>
+          <BrandOrManufacturer>SportFit</BrandOrManufacturer>
+          <UpcVendorBarcode>222222222222</UpcVendorBarcode>
+          <CountryOfOrigin>US</CountryOfOrigin>
+          <ItemUrl>http://www.domain.com/products/13345855/</ItemUrl>
+          <ImageUrl>http://www.domain.com/products/13345855/image.jpg</ImageUrl>
+          <Weight>0.43</Weight>
+          <WeightUnit>LBS</WeightUnit>
+          <DimWidth>6</DimWidth>
+          <DimLength>6</DimLength>
+          <DimHeight>6</DimHeight>
+          <DimUnit>IN</DimUnit>
+          <UCC>333333333333</UCC>
+      </Item>
+      <Item>
+        <Sku>222222222</Sku>
+        <ItemName>Ultiva Flash Skirt</ItemName>
+        <DeclaredCustomsValue>64.98</DeclaredCustomsValue>
+        <CurrencyCode>USD</CurrencyCode>
+        <Category>Women/Casual/Skirts</Category>
+        <Color>Brown,Red,Pastel Yellow</Color>
+        <Description>Lorem ipsum dolor sit amet, consectetuer...</Description>
+        <ShortDescription>Women’s Cotton Skirt</ShortDescription>
+        <Materials>Cotton</Materials>
+        <Size>Small</Size>
+        <BrandOrManufacturer>Ultiva</BrandOrManufacturer>
+        <UpcVendorBarcode>444444444444</UpcVendorBarcode>
+        <CountryOfOrigin>US</CountryOfOrigin>
+        <ItemUrl>http://www.domain.com/products/46456546/</ItemUrl>
+        <ImageUrl>http://www.domain.com/products/46456546/image.jpg</ImageUrl>
+        <Weight>0.43</Weight>
+        <WeightUnit>LBS</WeightUnit>
+        <DimWidth>6</DimWidth>
+        <DimLength>6</DimLength>
+        <DimHeight>6</DimHeight>
+        <DimUnit>IN</DimUnit>
+        <UCC>555555555555</UCC>
+      </Item>
+   </Items>
+</CatalogRequest>
