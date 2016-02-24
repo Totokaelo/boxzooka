@@ -1,12 +1,12 @@
 module Boxzooka
-  class ResponseItem
+  class ResponseItem < BaseElement
     # SKU of the Item.
-    attr_accessor :sku
+    field :sku
 
     # Status. Either 'Success' or 'Error'.
-    attr_accessor :status
+    field :status
 
     # Error message. Can be blank when Status == 'Success'
-    attr_accessor :error_message
+    field :error_message
   end
 end

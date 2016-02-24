@@ -1,0 +1,16 @@
+<?xml version=”1.0” encoding=”UTF-8”?>
+  <CatalogResponse>
+     <CustomerID>0123456789</CustomerID>
+     <Version>1.5</Version>
+     <Results>
+       <Item>
+          <Sku>111111111</Sku>
+          <Status>Success</Status>
+       </Item>
+       <Item>
+          <Sku>222222222</Sku>
+          <Status>Error</Status>
+          <ErrorMessage>Missing ItemName field.</ErrorMessage>
+       </Item>
+     </Results>
+  </CatalogResponse>
