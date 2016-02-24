@@ -36,4 +36,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'guard-rspec', '~> 4'
 
   s.add_runtime_dependency 'builder', '~> 3'
+  s.add_runtime_dependency 'ox', '~> 2'
 end

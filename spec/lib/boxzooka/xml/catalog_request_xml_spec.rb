@@ -29,12 +29,10 @@ describe Boxzooka::Xml::CatalogRequestXml do
   }
 
   let(:catalog_request) {
-    double(
-      'ey',
-      version: 1.5,
-      customer_access: double(customer_id: 123, customer_key: 'abc'),
-      items: [item]
-    )
+    cr = Boxzooka::CatalogRequest.new
+    cr.customer_access = Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc')
+    cr.items = [item]
+    cr
   }
 
   subject { described_class.new(catalog_request).xml }

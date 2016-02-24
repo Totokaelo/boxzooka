@@ -1,3 +1,5 @@
+require 'ox'
+
 module Boxzooka
   module Xml
     class ItemXml
@@ -9,6 +11,19 @@ module Boxzooka
       end
 
       private
+
+#      def build_xml_ox
+#        doc = Ox::Document.new(:version => '1.0')
+#        item = Ox::Element.new('Item')
+#
+#        item_name = Ox::Element.new('ItemName')
+#        item_name << item.name
+#
+#        item << item_name
+#        doc << item
+#
+#        Ox.dump(doc)
+#      end
 
       def build_xml
         builder = Builder::XmlMarkup.new
