@@ -1,7 +1,12 @@
+require 'boxzooka/response_item'
+
 module Boxzooka
   # Response from Boxzooka for CatalogRequest.
   class CatalogResponse < BaseResponse
     # Array of ResponseItem's
-    attr_accessor :results
+    collection :results,
+      entry_node_name: 'Item',
+      entry_field_type: :entity,
+      entry_type: ResponseItem
   end
 end

@@ -10,7 +10,7 @@ module Boxzooka
     # API Version
     scalar :version
 
-    def initialize(request)
+    def initialize(request = nil)
       @request = request
     end
   end
