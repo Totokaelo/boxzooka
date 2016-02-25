@@ -1,11 +1,17 @@
+require 'boxzooka/xml/serialization_helper'
 require 'ox'
 
 module Boxzooka
   module Xml
     # Serializes a descendant of BaseElement to XML.
     class Serializer
-      def initialize(object)
+      include Boxzooka::Xml::SerializationHelper
+
+      # +obj+: the object to serialize.
+      # +node_name+: optional override for the base node name.
+      def initialize(object, node_name: nil)
         @object = object
+        @node_name = node_name
       end
 
       # Serialized element.
@@ -32,18 +38,6 @@ module Boxzooka
         Ox.dump(doc)
       end
 
-      def field_node_name(field_name)
-        Boxzooka::StringUtils.camelize(field_name)
-      end
-
-      def field_options(field_name)
-        klass.field_options(field_name)
-      end
-
-      def field_type(field_name)
-        klass.field_type(field_name)
-      end
-
       def field_value(field_name)
         object.send(field_name)
       end
@@ -67,16 +61,18 @@ module Boxzooka
       end
 
       def root_node_name
-        klass.name.split('::').last
+        @node_name || klass.name.split('::').last
       end
 
       def serialize_field_and_add_to_node(field_name, node)
         node_name = field_node_name(field_name)
         value = field_value(field_name)
 
+        return if value.nil?
+
         case field_type(field_name)
-        when FieldTypes::TEXT         then node << new_node(node_name, value)
-        when FieldTypes::ENTITY       then node << Ox.parse(Xml.serialize(value))
+        when FieldTypes::SCALAR       then node << new_node(node_name, value.to_s)
+        when FieldTypes::ENTITY       then node << Ox.parse(Xml.serialize(value, node_name: node_name))
         when FieldTypes::COLLECTION   then serialize_collection_and_add_to_node(field_name, node)
         else raise NotImplementedError
         end
@@ -84,18 +80,14 @@ module Boxzooka
         nil
       end
 
-      FieldTypes = Boxzooka::BaseElement::FieldTypes
-
       def serialize_collection_and_add_to_node(field_name, node)
         node_name = field_node_name(field_name)
-        field_options = field_options(field_name)
-        serialize_to_flat = field_options[:flat]
-        entry_field_type = field_options.fetch(:entry_type)
+        serialize_to_flat = flat_collection?(field_name)
+        entry_field_type = entry_field_type(field_name)
 
         entry_nodes = field_value(field_name).map do |entry|
-          if entry_field_type == :simple
-            entry_node_name = field_options.fetch(:entry_node_name)
-            new_node(entry_node_name, entry.to_s)
+          if entry_field_type == FieldTypes::SCALAR
+            new_node(entry_node_name(field_name), entry.to_s)
           else
             Ox.parse(Xml.serialize(entry))
           end
