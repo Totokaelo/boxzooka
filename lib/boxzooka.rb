@@ -13,7 +13,3 @@ require 'boxzooka/string_utils'
 require 'boxzooka/version'
 
 require 'boxzooka/xml'
-require 'boxzooka/xml/catalog_request_xml'
-require 'boxzooka/xml/deserializer'
-require 'boxzooka/xml/item_xml'
-require 'boxzooka/xml/serializer'

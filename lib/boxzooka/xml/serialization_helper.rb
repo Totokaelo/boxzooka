@@ -25,6 +25,7 @@ module Boxzooka
       end
 
       def field_node_name(field_name)
+        klass.field_options(field_name)[:node_name] ||
         Boxzooka::StringUtils.camelize(field_name)
       end
 

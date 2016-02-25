@@ -1,4 +1,19 @@
 module Boxzooka
+  # BaseElement allows us to declare a variable and serialization rules in one fell swoop!
+  #
+  # class MyClass < BaseElement
+  #   scalar :string
+  #   scalar :integer, type: :integer
+  #
+  #   entity type: YourClass
+  #
+  #   collection :integers,
+  #     flat: true,
+  #     entry_node_name: 'Integer',
+  #     entry_field_type: :scalar,
+  #     entry_type: :integer
+  # end
+  #
   class BaseElement
     module ScalarTypes
       STRING = :string
@@ -51,11 +66,16 @@ module Boxzooka
       # Define a scalar.
       # +key+: name of the entity.
       # +options+:
-      #   :type - :integer, :decimal, :string
+      #   :type       - :integer, :decimal, :string
+      #   :node_name  - node name for entity. Defaults to camelcase'd field_name
       def scalar(key, opts = {})
         defaults                  = { type: ScalarTypes::STRING }
         options_before_overrides  = defaults.merge(opts)
         options                   = options_before_overrides.merge(field_type: FieldTypes::SCALAR)
+
+        unless [ScalarTypes::STRING, ScalarTypes::INTEGER, ScalarTypes::DECIMAL].include?(options[:type])
+          raise ArgumentError.new("Invalid :type - #{options[:type]}. Valid options: :string, :integer, :decimal")
+        end
 
         define_field(key, options)
       end
@@ -81,11 +101,22 @@ module Boxzooka
         define_field(key, options.merge(field_type: FieldTypes::COLLECTION))
       end
 
-      private
+      protected
 
       def fields
-        @fields ||= {}
+        if @fields.nil?
+          @fields = if defined?(superclass.fields)
+                      # Run up the inheritance tree and return any fields.
+                      superclass.fields.clone
+                    else
+                      {}
+                    end
+        end
+
+        @fields
       end
+
+      private
 
       def define_field(field_name, options)
         fields[field_name] = options

@@ -1,3 +1,6 @@
+require 'boxzooka/xml/deserializer'
+require 'boxzooka/xml/serializer'
+
 module Boxzooka
   module Xml
     # Serializes an object.
@@ -5,9 +8,6 @@ module Boxzooka
     # +node_name+: optional override for the base node name.
     def self.serialize(obj, node_name: nil)
       case obj
-      when CatalogRequest   then Xml::CatalogRequestXml.new(obj).xml
-      when Item             then Xml::ItemXml.new(obj).xml
-
       # This comes last to allow overrides above.
       when BaseElement      then Xml::Serializer.new(obj, node_name: node_name).xml
 
@@ -17,8 +17,6 @@ module Boxzooka
 
     def self.deserialize(xml, klass)
       case klass.new
-      when CatalogResponse  then Xml::DeserializeCatalogResponse.new(xml).object
-
       # This comes last to allow overrides above.
       when BaseElement      then Xml::Deserializer.new(xml, klass).object
 

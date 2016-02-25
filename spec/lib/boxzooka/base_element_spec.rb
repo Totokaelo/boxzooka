@@ -19,6 +19,56 @@ describe Boxzooka::BaseElement do
     "</DerivedClass>"
   }
 
+  describe 'inherited fields' do
+    class DerivedClass2 < DerivedClass
+    end
+
+    let(:child_instance) { DerivedClass2.new(simple: text) }
+    let(:child_xml) { "<DerivedClass2><Simple>#{text}</Simple></DerivedClass2>" }
+
+    describe 'field names' do
+      it 'should include fields from parent classes' do
+        expect(DerivedClass2.field_names).to eq([:simple, :number])
+      end
+    end
+
+    describe 'constructor' do
+      subject { child_instance }
+      it      { expect(subject.simple).to eq(text) }
+    end
+
+    describe 'serialization' do
+      subject { Boxzooka::Xml.serialize(child_instance) }
+      it      { expect(Ox.parse(subject)).to eq(Ox.parse(child_xml)) }
+    end
+
+    describe 'deserialization' do
+      subject { Boxzooka::Xml.deserialize(child_xml, DerivedClass2) }
+      it      { expect(subject).to eq(child_instance) }
+    end
+  end
+
+  describe 'arbitrary node name' do
+    let(:weird_value) { 'weird' }
+
+    class Weird < described_class
+      scalar :weird, node_name: 'NonStandard'
+    end
+
+    let(:instance) { Weird.new(weird: weird_value) }
+    let(:weird_xml) { "<Weird><NonStandard>#{weird_value}</NonStandard></Weird>" }
+
+    describe 'serialization' do
+      subject { Boxzooka::Xml.serialize(instance) }
+      it { expect(Ox.parse(subject)).to eq(Ox.parse(weird_xml)) }
+    end
+
+    describe 'deserialization' do
+      subject { Boxzooka::Xml.serialize(instance) }
+      it { expect(Ox.parse(subject)).to eq(Ox.parse(weird_xml)) }
+    end
+  end
+
   describe 'simple xml serialization' do
     subject { Boxzooka::Xml.serialize(simple_instance) }
 

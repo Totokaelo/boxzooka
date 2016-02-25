@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Boxzooka::Xml::CatalogRequestXml do
+describe Boxzooka::CatalogRequest do
   let(:item) {
     item = Boxzooka::Item.new
     item.brand_or_manufacturer = 'Dries van Noten'
@@ -35,14 +35,9 @@ describe Boxzooka::Xml::CatalogRequestXml do
     cr
   }
 
-  subject { described_class.new(catalog_request).xml }
+  subject { Boxzooka::Xml.serialize(catalog_request) }
 
   it 'outputs' do
-    require "rexml/document"
-
-    doc = REXML::Document.new(subject)
-    out = ""
-    doc.write(out, 1)
-    puts out
+    puts Ox.dump(Ox.parse(subject))
   end
 end

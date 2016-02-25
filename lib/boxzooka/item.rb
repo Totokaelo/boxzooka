@@ -1,73 +1,73 @@
 module Boxzooka
-  class Item
+  class Item < BaseElement
     # Product Brand or Manufacturer
-    attr_accessor :brand_or_manufacturer
+    scalar :brand_or_manufacturer
 
     # Currency of declared_customs_value
-    attr_accessor :currency_code
+    scalar :currency_code
 
     # Category of product. - Helps with customs classification.
-    attr_accessor :category
+    scalar :category
 
     # Color of product
-    attr_accessor :color
+    scalar :color
 
     # ISO2 Country in which product was manufactured
-    attr_accessor :country_of_origin
+    scalar :country_of_origin
 
     # Value of Product
-    attr_accessor :declared_customs_value
+    scalar :declared_customs_value, type: :decimal
 
     # Necessary for customs classification.
-    attr_accessor :description
+    scalar :description
 
     # Height of product. Helps with shipping cost evaluation.
-    attr_accessor :dim_height
+    scalar :dim_height, type: :decimal
 
     # Length of product. Helps with shipping cost evaluation.
-    attr_accessor :dim_length
+    scalar :dim_length, type: :decimal
 
     # Unit of measurement used by DimWidth DimHeight & DimLength fields
-    attr_accessor :dim_unit
+    # IN or CM
+    scalar :dim_unit
 
     # Width of product. Helps with shipping cost evaluation.
-    # IN or CM
-    attr_accessor :dim_width
+    scalar :dim_width, type: :decimal
 
     # URL of product image. Useful for verification and QC processes in warehouse.
-    attr_accessor :image_url
+    scalar :image_url
 
     # Product name
-    attr_accessor :item_name
+    scalar :item_name
 
     # URL of product. Customs prefer to use the authentic product URL to verify product value.
-    attr_accessor :item_url
+    scalar :item_url
 
     # Product materials. Useful for customs classification.
-    attr_accessor :materials
+    scalar :materials
 
     # A more concise and meaningful description than your standard Description field.
     # Something “to the point” i.e. “Wool Knit Cap” or “Denim Jeans”.
     # Very useful for customs classification.
-    attr_accessor :short_description
+    scalar :short_description
 
     # Product size. Useful for customs classification.
-    attr_accessor :size
+    scalar :size
 
     # Product SKU - Unique identifier for each product
-    attr_accessor :sku
+    scalar :sku
 
     # UCC product code
-    attr_accessor :ucc
+    scalar :ucc, type: :integer, node_name: 'UCC'
 
     # UPC Vendor Barcode fo Product
-    attr_accessor :upc_vendor_barcode
+    scalar :upc_vendor_barcode
 
     # Weight of product. Required for shipping cost evaluation.
-    attr_accessor :weight
+    scalar :weight, type: :decimal
 
     # Unit of weight used by Weight field
     # LBS or KGS
-    attr_accessor :weight_unit
+    scalar :weight_unit
   end
 end

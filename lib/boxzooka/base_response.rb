@@ -1,14 +1,14 @@
 module Boxzooka
   # Base class for Boxzooka API response objects.
-  class BaseResponse
+  class BaseResponse < BaseElement
     # CustomerId
-    attr_accessor :customer_id
+    scalar :customer_id
 
     # Original Request
     attr_reader :request
 
     # API Version
-    attr_accessor :version
+    scalar :version
 
     def initialize(request)
       @request = request

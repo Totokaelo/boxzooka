@@ -1,8 +1,11 @@
+require 'boxzooka/customer_access'
+
 module Boxzooka
   # Base class for Boxzooka API request objects.
-  class BaseRequest
+  class BaseRequest < BaseElement
     # Authentication
-    attr_accessor :customer_access
+    entity :customer_access,
+      type: Boxzooka::CustomerAccess
 
     def version
       '1.5'
