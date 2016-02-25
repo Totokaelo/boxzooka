@@ -15,6 +15,17 @@ module Boxzooka
     end
 
     class << self
+      # Cast a scalar argument.
+      def cast_scalar(arg, scalar_type)
+        if arg
+          case scalar_type
+            when ScalarTypes::INTEGER then arg.to_i
+            when ScalarTypes::DECIMAL then arg.to_f
+            else arg
+          end
+        end
+      end
+
       # Array of all field names for model.
       def field_names
         fields.keys
@@ -68,17 +79,6 @@ module Boxzooka
       def collection(key, options = {})
         validate_options(options, :entry_field_type, :entry_type, :entry_node_name)
         define_field(key, options.merge(field_type: FieldTypes::COLLECTION))
-      end
-
-      # Perform any cast.
-      def cast_scalar(arg, scalar_type)
-        if arg
-          case scalar_type
-            when ScalarTypes::INTEGER then arg.to_i
-            when ScalarTypes::DECIMAL then arg.to_f
-            else arg
-          end
-        end
       end
 
       private
