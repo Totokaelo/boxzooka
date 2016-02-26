@@ -6,10 +6,10 @@ module Boxzooka
     root node_name: 'Inbound'
 
     # Purchase order number
-    scalar :po, node_name: 'PO', type: :integer
+    scalar :po, node_name: 'PO'
 
     # ID of incoming shipping container
-    scalar :container_id, node_name: 'ContainerID', type: :integer
+    scalar :container_id, node_name: 'ContainerID'
 
     # Carrier being used for shipment
     scalar :carrier

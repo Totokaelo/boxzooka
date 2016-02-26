@@ -1,6 +1,6 @@
 module Boxzooka
-  # Essentially a WHERE clause for ProductList webservice.
-  class ProductListFilter < BaseElement
+  # Generic ListFilter. Essentially a WHERE clause.
+  class ListFilter < BaseElement
     root node_name: 'Filter'
 
     # Field to target.
