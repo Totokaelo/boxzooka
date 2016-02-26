@@ -29,10 +29,6 @@ module Boxzooka
         Boxzooka::StringUtils.camelize(field_name)
       end
 
-      def node_field_name(node_name)
-        Boxzooka::StringUtils.snaketize(node_name).intern
-      end
-
       def field_options(field_name)
         klass.field_options(field_name)
       end
@@ -47,6 +43,14 @@ module Boxzooka
 
       def field_exists?(field_name)
         klass.field_names.include?(field_name)
+      end
+
+      def root_node_name
+        klass.root_node_name
+      end
+
+      def node_field_name(node_name)
+        Boxzooka::StringUtils.snaketize(node_name).intern
       end
 
       def scalar_fields

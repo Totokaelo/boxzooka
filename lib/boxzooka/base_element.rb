@@ -2,6 +2,8 @@ module Boxzooka
   # BaseElement allows us to declare a variable and serialization rules in one fell swoop!
   #
   # class MyClass < BaseElement
+  #   root node_name: 'MyClassNode'
+  #
   #   scalar :string
   #   scalar :integer, type: :integer
   #
@@ -61,6 +63,22 @@ module Boxzooka
 
       def field_options(field_name)
         fields.fetch(field_name)
+      end
+
+      # Serialization options for root node.
+      # +options+:
+      #   :node_name  - node name for entity. Defaults to camelcase'd field_name
+      def root(options)
+        @root_options = options
+      end
+
+      # Root node name.
+      def root_node_name
+        if @root_options
+          @root_options.fetch(:node_name)
+        else
+          self.name.split('::').last
+        end
       end
 
       # Define a scalar.

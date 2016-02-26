@@ -61,7 +61,11 @@ module Boxzooka
       end
 
       def root_node_name
-        @node_name || klass.name.split('::').last
+        # Node name specified by argument.
+        @node_name ||
+
+        # Node name specified by class.
+        super
       end
 
       def serialize_field_and_add_to_node(field_name, node)

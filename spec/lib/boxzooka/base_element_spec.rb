@@ -64,8 +64,28 @@ describe Boxzooka::BaseElement do
     end
 
     describe 'deserialization' do
+      subject { Boxzooka::Xml.deserialize(weird_xml, Weird) }
+      it { expect(subject).to eq(instance) }
+    end
+  end
+
+  describe 'root directive' do
+    class Klass < described_class
+      root node_name: 'Root'
+      scalar :a, type: :integer
+    end
+
+    let(:instance) { Klass.new(a: 1) }
+    let(:xml) { "<Root><A>1</A></Root>" }
+
+    describe 'serialization' do
       subject { Boxzooka::Xml.serialize(instance) }
-      it { expect(Ox.parse(subject)).to eq(Ox.parse(weird_xml)) }
+      it { expect(Ox.parse(subject)).to eq(Ox.parse(xml)) }
+    end
+
+    describe 'deserialization' do
+      subject { Boxzooka::Xml.deserialize(xml, Klass) }
+      it { expect(subject).to eq(instance) }
     end
   end
 
