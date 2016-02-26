@@ -6,16 +6,20 @@ describe Boxzooka::BaseElement do
 
   class DerivedClass < described_class
     scalar :simple
-    scalar :number, type: ScalarTypes::INTEGER
+    scalar :number,   type: ScalarTypes::INTEGER
+    scalar :datetime, type: ScalarTypes::DATETIME
   end
 
   let(:text) { 'hello' }
   let(:number) { (rand * 100).floor }
-  let(:simple_instance) { DerivedClass.new(simple: text, number: number) }
+  let(:datetime_s) { '2015-02-16 05:00:00' }
+  let(:datetime) { DateTime.parse(datetime_s) }
+  let(:simple_instance) { DerivedClass.new(simple: text, number: number, datetime: datetime) }
   let(:simple_xml) {
     "<DerivedClass>" \
       "<Simple>hello</Simple>" \
       "<Number>#{number}</Number>" \
+      "<Datetime>#{datetime_s}</Datetime>" \
     "</DerivedClass>"
   }
 
@@ -28,7 +32,7 @@ describe Boxzooka::BaseElement do
 
     describe 'field names' do
       it 'should include fields from parent classes' do
-        expect(DerivedClass2.field_names).to eq([:simple, :number])
+        expect(DerivedClass2.field_names).to eq([:simple, :number, :datetime])
       end
     end
 
@@ -95,6 +99,7 @@ describe Boxzooka::BaseElement do
     it 'should serialize simple elements' do
       expect(subject).to include("<Simple>hello</Simple>")
       expect(subject).to include("<Number>#{number}</Number>")
+      expect(subject).to include("<Datetime>#{datetime_s}</Datetime>")
     end
   end
 
@@ -104,6 +109,7 @@ describe Boxzooka::BaseElement do
     it 'should serialize simple elements' do
       expect(subject.simple).to eq(text)
       expect(subject.number).to eq(number)
+      expect(subject.datetime).to eq(datetime)
     end
   end
 
@@ -135,7 +141,7 @@ describe Boxzooka::BaseElement do
 
   let(:complex_xml) {
     "<ComplexDerivedClass>" \
-    "<Entity><Simple>hello</Simple><Number>#{number}</Number></Entity>" \
+    "<Entity><Simple>hello</Simple><Number>#{number}</Number><Datetime>#{datetime_s}</Datetime></Entity>" \
     "<DeclaredArray>" \
     "<ArrayEntry>10</ArrayEntry>" \
     "<ArrayEntry>15</ArrayEntry>" \

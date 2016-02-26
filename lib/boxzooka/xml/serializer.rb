@@ -70,18 +70,28 @@ module Boxzooka
 
       def serialize_field_and_add_to_node(field_name, node)
         node_name = field_node_name(field_name)
+        field_klass = field_class(field_name)
         value = field_value(field_name)
 
         return if value.nil?
 
         case field_type(field_name)
-        when FieldTypes::SCALAR       then node << new_node(node_name, value.to_s)
+        when FieldTypes::SCALAR       then node << new_node(node_name, serialize_scalar_value(value, field_klass))
         when FieldTypes::ENTITY       then node << Ox.parse(Xml.serialize(value, node_name: node_name))
         when FieldTypes::COLLECTION   then serialize_collection_and_add_to_node(field_name, node)
         else raise NotImplementedError
         end
 
         nil
+      end
+
+      def serialize_scalar_value(value, type)
+        case type
+        when ScalarTypes::DATETIME
+          value.strftime('%Y-%m-%d %H:%M:%S')
+        else
+          value.to_s
+        end
       end
 
       def serialize_collection_and_add_to_node(field_name, node)

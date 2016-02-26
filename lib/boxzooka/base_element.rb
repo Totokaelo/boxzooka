@@ -4,10 +4,12 @@ module Boxzooka
   # class MyClass < BaseElement
   #   root node_name: 'MyClassNode'
   #
-  #   scalar :string
-  #   scalar :integer, type: :integer
+  #   scalar :my_string
+  #   scalar :my_integer, type: :integer
+  #   scalar :my_decimal, type: :decimal
+  #   scalar :my_datetime, type: :datetime
   #
-  #   entity type: YourClass
+  #   entity :my_class, type: YourClass
   #
   #   collection :integers,
   #     flat: true,
@@ -18,9 +20,12 @@ module Boxzooka
   #
   class BaseElement
     module ScalarTypes
-      STRING = :string
-      INTEGER = :integer
-      DECIMAL = :decimal
+      DATETIME  = :datetime
+      DECIMAL   = :decimal
+      INTEGER   = :integer
+      STRING    = :string
+
+      ALL = [DATETIME, DECIMAL, INTEGER, STRING]
     end
 
     module FieldTypes
@@ -32,12 +37,13 @@ module Boxzooka
     end
 
     class << self
-      # Cast a scalar argument.
+      # Cast a scalar argument from incoming String to whatever type.
       def cast_scalar(arg, scalar_type)
         if arg
           case scalar_type
-            when ScalarTypes::INTEGER then arg.to_i
-            when ScalarTypes::DECIMAL then arg.to_f
+            when ScalarTypes::DATETIME  then DateTime.parse(arg.to_s)
+            when ScalarTypes::DECIMAL   then arg.to_f
+            when ScalarTypes::INTEGER   then arg.to_i
             else arg
           end
         end
@@ -91,8 +97,8 @@ module Boxzooka
         options_before_overrides  = defaults.merge(opts)
         options                   = options_before_overrides.merge(field_type: FieldTypes::SCALAR)
 
-        unless [ScalarTypes::STRING, ScalarTypes::INTEGER, ScalarTypes::DECIMAL].include?(options[:type])
-          raise ArgumentError.new("Invalid :type - #{options[:type]}. Valid options: :string, :integer, :decimal")
+        unless ScalarTypes::ALL.include?(options[:type])
+          raise ArgumentError.new("Invalid :type - #{options[:type]}. Valid options: #{ScalarTypes::ALL.map { |s| ":#{s}" }.join(', ')}")
         end
 
         define_field(key, options)

@@ -21,7 +21,7 @@ module Boxzooka
       end
 
       def field_class(field_name)
-        field_options(field_name).fetch(:type)
+        field_options(field_name)[:type]
       end
 
       def field_node_name(field_name)
