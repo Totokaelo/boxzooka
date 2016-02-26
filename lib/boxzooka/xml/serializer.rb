@@ -98,12 +98,16 @@ module Boxzooka
         node_name = field_node_name(field_name)
         serialize_to_flat = flat_collection?(field_name)
         entry_field_type = entry_field_type(field_name)
+        entry_node_name = entry_node_name(field_name)
 
         entry_nodes = field_value(field_name).map do |entry|
           if entry_field_type == FieldTypes::SCALAR
-            new_node(entry_node_name(field_name), entry.to_s)
+            new_node(
+              entry_node_name,
+              serialize_scalar_value(entry, entry_type(field_name))
+            )
           else
-            Ox.parse(Xml.serialize(entry))
+            Ox.parse(Xml.serialize(entry, node_name: entry_node_name))
           end
         end
 
