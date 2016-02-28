@@ -1,13 +1,10 @@
 require 'spec_helper'
 
-describe Boxzooka::ProductListRequest do
+describe Boxzooka::InboundDiscrepancyListRequest do
   let(:instance) {
     described_class.new(
       customer_access: Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc'),
-      filters: [described_class.filter(filter_type: 'Description', filter_value: 'Stocks')],
-      order_by: 'Description',
-      sort: 'ASC',
-      skip_count: 300
+      filters: [described_class.filter(filter_type: 'Sku', filter_value: '123456')]
     )
   }
 

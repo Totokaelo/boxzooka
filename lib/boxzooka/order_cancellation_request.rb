@@ -1,11 +1,6 @@
 module Boxzooka
-  class InboundCancellationRequest < BaseRequest
-    root node_name: 'OrderCancellation'
-
-    # Purchase order number
-    # Per their documentation this may be a flat array, but don't bother including until needed
-    #
-    scalar :po
+  class OrderCancellationRequest < BaseRequest
+    scalar :order_id, node_name: 'OrderID'
 
     # 'Y’ or ‘N’. If set to ‘Y’, Inbound record will be archived and removed from most views.
     # If set to ‘N’, or excluded, Inbound record will remain in most views, marked as canceled.

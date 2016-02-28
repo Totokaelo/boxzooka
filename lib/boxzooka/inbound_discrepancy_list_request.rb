@@ -1,16 +1,16 @@
 require 'boxzooka/list_filter'
 
 module Boxzooka
-  # Request to list Products (or 'Items') on Boxzooka's DB.
-  # Limit 300 Items returned per request.
-  class ProductListRequest < BaseRequest
+  # The InboundDiscrepancy data set is used by Boxzooka to provide you with information about
+  # discrepancies between what your Inbound notifications declared, and what we actually received.
+  class InboundDiscrepancyListRequest < BaseRequest
     Filter = Class.new(ListFilter)
 
     def self.filter(opts)
       Filter.new(opts)
     end
 
-    root node_name: 'ProductList'
+    root node_name: 'InboundDiscrepancyList'
 
     collection :filters,
       flat: true,

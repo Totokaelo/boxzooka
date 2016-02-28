@@ -1,13 +1,12 @@
 require 'spec_helper'
 
-describe Boxzooka::ProductListRequest do
+describe Boxzooka::OrderCancellationRequest do
+
   let(:instance) {
     described_class.new(
       customer_access: Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc'),
-      filters: [described_class.filter(filter_type: 'Description', filter_value: 'Stocks')],
-      order_by: 'Description',
-      sort: 'ASC',
-      skip_count: 300
+      order_id: 'TKTESTO0001',
+      delete: 'Y'
     )
   }
 

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Boxzooka::ProductListRequest do
+describe Boxzooka::OrdersListRequest do
+  let(:date_from) { described_class.filter(filter_type: 'DateFrom', filter_value: '2016-01-01') }
+  let(:date_to)   { described_class.filter(filter_type: 'DateTo', filter_value: '2016-02-29') }
+
   let(:instance) {
     described_class.new(
       customer_access: Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc'),
-      filters: [described_class.filter(filter_type: 'Description', filter_value: 'Stocks')],
-      order_by: 'Description',
-      sort: 'ASC',
-      skip_count: 300
+      filters: [date_from, date_to]
     )
   }
 
