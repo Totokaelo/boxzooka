@@ -9,7 +9,7 @@ describe Boxzooka::CustomerAccess do
 
   let(:serialized_xml) {
     "<CustomerAccess>\n"                              \
-    "  <CustomerId>#{customer_id}</CustomerId>\n"     \
+    "  <CustomerID>#{customer_id}</CustomerID>\n"     \
     "  <CustomerKey>#{customer_key}</CustomerKey>\n"  \
     "</CustomerAccess>"
   }
