@@ -4,7 +4,7 @@ describe Boxzooka::ProductListRequest do
   let(:instance) {
     described_class.new(
       customer_access: Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc'),
-      filters: [described_class.filter(filter_type: 'Description', filter_value: 'Stocks')],
+      filters: [described_class.filter(filter_type: 'DescriptionSearch', filter_value: 'Stocks')],
       order_by: 'Description',
       sort: 'ASC',
       skip_count: 300

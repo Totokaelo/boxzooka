@@ -1,5 +1,7 @@
 module Boxzooka
   class OrderCancellationRequest < BaseRequest
+    root node_name: 'OrderCancellation'
+
     scalar :order_id, node_name: 'OrderID'
 
     # 'Y’ or ‘N’. If set to ‘Y’, Inbound record will be archived and removed from most views.

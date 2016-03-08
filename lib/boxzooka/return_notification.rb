@@ -9,7 +9,8 @@ module Boxzooka
     scalar :return_date, type: :datetime
 
     # RMA used to identify return
-    scalar :rma
+    scalar :rma,
+      node_name: 'RMA'
 
     # Tracking number of package
     scalar :return_tracking
