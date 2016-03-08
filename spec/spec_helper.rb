@@ -1,4 +1,5 @@
 require 'boxzooka'
+require 'factory_girl'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -10,4 +11,10 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+
+  # Include FactoryGirl
+  config.include FactoryGirl::Syntax::Methods
+
+  FactoryGirl.definition_file_paths = [File.expand_path('../factories', __FILE__)]
+  FactoryGirl.find_definitions
 end

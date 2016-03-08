@@ -4,22 +4,33 @@ require 'net/http'
 module Boxzooka
   # Run requests, construct + return responses.
   class Endpoint
-    def initialize(customer_access = nil)
-      @customer_access = customer_access
+    def initialize(customer_id:, customer_key:, debug: false)
+      @customer_access = Boxzooka::CustomerAccess.new(customer_id: customer_id, customer_key: customer_key)
+      @debug = debug
     end
 
     # Run the request.
     def execute(request)
       request.customer_access ||= @customer_access
 
-      request_xml     = serialize(request)
-      endpoint_url    = url_for_request(request)
-      response_xml    = post(endpoint_url, request_xml)
+      request_xml       = serialize(request)
+      endpoint_url      = url_for_request(request)
+      http_response     = post(endpoint_url, request_xml)
 
-      return response_xml
+      response_xml      = http_response.
+                          body.
+                          sub("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n", '')
 
-      response_klass  = response_class_for_request(request)
-      response        = deserialize(response_xml, response_klass)
+      if @debug
+        puts "RESPONSE XML"
+        puts response_xml
+      end
+
+      response_klass    = response_class_for_request(request)
+      response          = deserialize(response_xml, response_klass)
+
+      response.request  = request
+      response.xml      = response_xml
 
       response
     end
@@ -72,7 +83,7 @@ module Boxzooka
       when OrdersListRequest              then 'https://sandbox3.boxzooka.com/orderlistapi'
       when ReturnNotificationRequest      then 'https://sandbox3.boxzooka.com/returnnotificationapi'
       else
-        raise NotImplementedRequest
+        raise NotImplementedRequest "No Response Class for #{request.class.name}"
       end
     end
 
