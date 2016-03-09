@@ -45,6 +45,7 @@ module Boxzooka
       when InboundCancellationRequest     then 'https://sandbox3.boxzooka.com/inboundcancelapi'
       when InboundListRequest             then 'https://sandbox3.boxzooka.com/inboundlistapi'
       when InboundDiscrepancyListRequest  then 'https://sandbox3.boxzooka.com/inbounddiscrepancyapi'
+      when InventoryListRequest           then 'https://sandbox3.boxzooka.com/inventorylistapi'
       when OrdersRequest                  then 'https://sandbox3.boxzooka.com/ordersapi'
       when OrderCancellationRequest       then 'https://sandbox3.boxzooka.com/ordercancelapi'
       when OrdersListRequest              then 'https://sandbox3.boxzooka.com/orderlistapi'
