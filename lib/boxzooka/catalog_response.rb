@@ -1,4 +1,4 @@
-require 'boxzooka/response_item'
+require 'boxzooka/catalog_response_item'
 
 module Boxzooka
   # Response from Boxzooka for CatalogRequest.
@@ -7,6 +7,6 @@ module Boxzooka
     collection :results,
       entry_node_name: 'Item',
       entry_field_type: :entity,
-      entry_type: ResponseItem
+      entry_type: CatalogResponseItem
   end
 end

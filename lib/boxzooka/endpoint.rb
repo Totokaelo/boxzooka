@@ -35,7 +35,24 @@ module Boxzooka
       response
     end
 
-    private
+    # Return the endpoint URL for request.
+    # TODO factor this out to a config object.
+    def url_for_request(request)
+      case request
+      when CatalogRequest                 then 'https://sandbox3.boxzooka.com/productsapi'
+      when ProductListRequest             then 'https://sandbox3.boxzooka.com/productlistapi'
+      when InboundRequest                 then 'https://sandbox3.boxzooka.com/inboundapi'
+      when InboundCancellationRequest     then 'https://sandbox3.boxzooka.com/inboundcancelapi'
+      when InboundListRequest             then 'https://sandbox3.boxzooka.com/inboundlistapi'
+      when InboundDiscrepancyListRequest  then 'https://sandbox3.boxzooka.com/inbounddiscrepancyapi'
+      when OrdersRequest                  then 'https://sandbox3.boxzooka.com/ordersapi'
+      when OrderCancellationRequest       then 'https://sandbox3.boxzooka.com/ordercancelapi'
+      when OrdersListRequest              then 'https://sandbox3.boxzooka.com/orderlistapi'
+      when ReturnNotificationRequest      then 'https://sandbox3.boxzooka.com/returnnotificationapi'
+      else
+        raise NotImplementedRequest "No Response Class for #{request.class.name}"
+      end
+    end
 
     # Transform a PORO Boxzooka::BaseRequest into an XML String.
     def serialize(obj)
@@ -46,6 +63,8 @@ module Boxzooka
     def deserialize(xml, klass)
       Boxzooka::Xml.deserialize(xml, klass)
     end
+
+    private
 
     # Post the xml to the url. Return response body.
     def post(url, request_xml)
@@ -66,25 +85,6 @@ module Boxzooka
       end
 
       response
-    end
-
-    # Return the endpoint URL for request.
-    # TODO factor this out to a config object.
-    def url_for_request(request)
-      case request
-      when CatalogRequest                 then 'https://sandbox3.boxzooka.com/productsapi'
-      when ProductListRequest             then 'https://sandbox3.boxzooka.com/productlistapi'
-      when InboundRequest                 then 'https://sandbox3.boxzooka.com/inboundapi'
-      when InboundCancellationRequest     then 'https://sandbox3.boxzooka.com/inboundcancelapi'
-      when InboundListRequest             then 'https://sandbox3.boxzooka.com/inboundlistapi'
-      when InboundDiscrepancyListRequest  then 'https://sandbox3.boxzooka.com/inbounddiscrepancyapi'
-      when OrdersRequest                  then 'https://sandbox3.boxzooka.com/ordersapi'
-      when OrderCancellationRequest       then 'https://sandbox3.boxzooka.com/ordercancelapi'
-      when OrdersListRequest              then 'https://sandbox3.boxzooka.com/orderlistapi'
-      when ReturnNotificationRequest      then 'https://sandbox3.boxzooka.com/returnnotificationapi'
-      else
-        raise NotImplementedRequest "No Response Class for #{request.class.name}"
-      end
     end
 
     # Return the response class for a request.

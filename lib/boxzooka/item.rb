@@ -9,10 +9,10 @@ module Boxzooka
     # Category of product. - Helps with customs classification.
     scalar :category
 
-    # Color of product
+    # Color of product.
     scalar :color
 
-    # ISO2 Country in which product was manufactured
+    # ISO2 Country in which product was manufactured.
     scalar :country_of_origin
 
     # Value of Product
