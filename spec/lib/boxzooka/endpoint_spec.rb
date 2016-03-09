@@ -38,5 +38,10 @@ describe Boxzooka::Endpoint do
       puts response.xml
       expect(response.xml).to_not be_nil
     end
+
+    it 'should have results' do
+      expect(response.results).to_not be_nil
+      expect(response.results).to_not be_empty
+    end
   end
 end
