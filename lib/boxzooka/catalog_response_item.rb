@@ -10,10 +10,11 @@ module Boxzooka
     # Error message. Can be blank when Status == 'Success'
     scalar :error_message
 
-    # NEW postings will return 'Success'
-    # UPDATES will return 'Update Success'
     def success?
-      status =~ /success/
+      [
+        'Success',        # Success for creates
+        'Update Success'  # Success for updates
+      ].include?(status)
     end
   end
 end
