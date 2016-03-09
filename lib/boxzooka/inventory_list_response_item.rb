@@ -14,7 +14,8 @@ module Boxzooka
       node_name: 'Sku'
 
     # Boxzooka's internal Warehouse marker.
-    scalar :warehouse_id
+    scalar :warehouse_id,
+      node_name: 'WarehouseID'
 
     # Warehouse city.
     scalar :warehouse_city
