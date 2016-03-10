@@ -44,4 +44,7 @@ describe Boxzooka::Endpoint do
       expect(response.results).to_not be_empty
     end
   end
+
+  describe 'Orders' do
+  end
 end
