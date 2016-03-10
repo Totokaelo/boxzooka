@@ -39,7 +39,13 @@ module Boxzooka
     # Return the endpoint URL for request.
     def url_for_request(request)
       simple_class_name = request.class.name.split('::').last
-      @urls.fetch(simple_class_name)
+      url = @urls[simple_class_name]
+
+      if url
+        url
+      else
+        raise NotImplementedRequest "No Response Class for #{simple_class_name}"
+      end
     end
 
     # Transform a PORO Boxzooka::BaseRequest into an XML String.
