@@ -4,8 +4,9 @@ require 'net/http'
 module Boxzooka
   # Run requests, construct + return responses.
   class Endpoint
-    def initialize(customer_id:, customer_key:, debug: false)
+    def initialize(customer_id:, customer_key:, urls:, debug: false)
       @customer_access = Boxzooka::CustomerAccess.new(customer_id: customer_id, customer_key: customer_key)
+      @urls = urls
       @debug = debug
     end
 
@@ -36,23 +37,9 @@ module Boxzooka
     end
 
     # Return the endpoint URL for request.
-    # TODO factor this out to a config object.
     def url_for_request(request)
-      case request
-      when CatalogRequest                 then 'https://sandbox3.boxzooka.com/productsapi'
-      when ProductListRequest             then 'https://sandbox3.boxzooka.com/productlistapi'
-      when InboundRequest                 then 'https://sandbox3.boxzooka.com/inboundapi'
-      when InboundCancellationRequest     then 'https://sandbox3.boxzooka.com/inboundcancelapi'
-      when InboundListRequest             then 'https://sandbox3.boxzooka.com/inboundlistapi'
-      when InboundDiscrepancyListRequest  then 'https://sandbox3.boxzooka.com/inbounddiscrepancyapi'
-      when InventoryListRequest           then 'https://sandbox3.boxzooka.com/inventorylistapi'
-      when OrdersRequest                  then 'https://sandbox3.boxzooka.com/ordersapi'
-      when OrderCancellationRequest       then 'https://sandbox3.boxzooka.com/ordercancelapi'
-      when OrdersListRequest              then 'https://sandbox3.boxzooka.com/orderlistapi'
-      when ReturnNotificationRequest      then 'https://sandbox3.boxzooka.com/returnnotificationapi'
-      else
-        raise NotImplementedRequest "No Response Class for #{request.class.name}"
-      end
+      simple_class_name = request.class.name.split('::').last
+      @urls.fetch(simple_class_name)
     end
 
     # Transform a PORO Boxzooka::BaseRequest into an XML String.
