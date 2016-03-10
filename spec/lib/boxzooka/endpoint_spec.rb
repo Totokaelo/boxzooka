@@ -31,7 +31,7 @@ describe Boxzooka::Endpoint do
     end
   end
 
-  describe 'InventoryList', :focus do
+  describe 'InventoryList' do
     let(:request) { Boxzooka::InventoryListRequest.new }
 
     it 'XML should be populated' do
