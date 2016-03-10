@@ -20,7 +20,7 @@ describe Boxzooka::Endpoint do
     }
   }
 
-  let(:endpoint) { described_class.new(customer_id: customer_id, customer_key: customer_key, urls: urls) }
+  let(:endpoint) { described_class.new(customer_id: customer_id, customer_key: customer_key, urls: urls, debug: true) }
   let(:response)  { endpoint.execute(request) }
 
   describe 'Catalog' do
@@ -34,8 +34,8 @@ describe Boxzooka::Endpoint do
     end
   end
 
-  describe 'ProductList' do
-    let(:request)   { Boxzooka::ProductListRequest.new }
+  describe 'ProductList', :focus do
+    let(:request)   { Boxzooka::ProductListRequest.new(filters: [Boxzooka::ListFilter.new(filter_type: 'Sku', filter_value: '510105')]) }
 
     it 'XML should be populated' do
       expect(response.xml).to_not be_nil
