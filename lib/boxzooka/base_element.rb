@@ -167,6 +167,8 @@ module Boxzooka
       end
     end
 
+    # Instance Methods
+
     def initialize(hash = {})
       self.class.field_names.each do |field_name|
         field_name_s = field_name.to_s
