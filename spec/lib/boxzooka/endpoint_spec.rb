@@ -6,17 +6,18 @@ describe Boxzooka::Endpoint do
 
   let(:urls) {
     {
-      'CatalogRequest'                => 'https://sandbox3.boxzooka.com/productsapi',
-      'ProductListRequest'            => 'https://sandbox3.boxzooka.com/productlistapi',
-      'InboundRequest'                => 'https://sandbox3.boxzooka.com/inboundapi',
-      'InboundCancellationRequest'    => 'https://sandbox3.boxzooka.com/inboundcancelapi',
-      'InboundListRequest'            => 'https://sandbox3.boxzooka.com/inboundlistapi',
-      'InboundDiscrepancyListRequest' => 'https://sandbox3.boxzooka.com/inbounddiscrepancyapi',
-      'InventoryListRequest'          => 'https://sandbox3.boxzooka.com/inventorylistapi',
-      'OrdersRequest'                 => 'https://sandbox3.boxzooka.com/ordersapi',
-      'OrderCancellationRequest'      => 'https://sandbox3.boxzooka.com/ordercancelapi',
-      'OrdersListRequest'             => 'https://sandbox3.boxzooka.com/orderlistapi',
-      'ReturnNotificationRequest'     => 'https://sandbox3.boxzooka.com/returnnotificationapi'
+      'CatalogRequest'                  => 'https://sandbox3.boxzooka.com/productsapi',
+      'ProductListRequest'              => 'https://sandbox3.boxzooka.com/productlistapi',
+      'InboundRequest'                  => 'https://sandbox3.boxzooka.com/inboundapi',
+      'InboundCancellationRequest'      => 'https://sandbox3.boxzooka.com/inboundcancelapi',
+      'InboundListRequest'              => 'https://sandbox3.boxzooka.com/inboundlistapi',
+      'InboundDiscrepancyListRequest'   => 'https://sandbox3.boxzooka.com/inbounddiscrepancyapi',
+      'InventoryListRequest'            => 'https://sandbox3.boxzooka.com/inventorylistapi',
+      'OrdersRequest'                   => 'https://sandbox3.boxzooka.com/ordersapi',
+      'OrderCancellationRequest'        => 'https://sandbox3.boxzooka.com/ordercancelapi',
+      'OrdersListRequest'               => 'https://sandbox3.boxzooka.com/orderlistapi',
+      'ReturnNotificationRequest'       => 'https://sandbox3.boxzooka.com/returnnotificationapi',
+      'InventoryAdjustmentsListRequest' => 'https://sandbox3.boxzooka.com/inventoryadjustmentsapi'
     }
   }
 
@@ -29,13 +30,17 @@ describe Boxzooka::Endpoint do
 
     let(:request) { Boxzooka::CatalogRequest.new(items: [item1]) }
 
+    it { expect(response.class).to be(Boxzooka::CatalogResponse) }
+
     it 'XML should be populated' do
       expect(response.xml).to_not be_nil
     end
   end
 
-  describe 'ProductList', :focus do
-    let(:request)   { Boxzooka::ProductListRequest.new(filters: [Boxzooka::ListFilter.new(filter_type: 'Sku', filter_value: '510105')]) }
+  describe 'ProductList' do
+    let(:request)   { Boxzooka::ProductListRequest.new_with_filters(filters: { sku: '510105' }) }
+
+    it { expect(response.class).to be(Boxzooka::ProductListResponse) }
 
     it 'XML should be populated' do
       expect(response.xml).to_not be_nil
@@ -50,6 +55,8 @@ describe Boxzooka::Endpoint do
   describe 'InventoryList' do
     let(:request) { Boxzooka::InventoryListRequest.new }
 
+    it { expect(response.class).to be(Boxzooka::InventoryListResponse) }
+
     it 'XML should be populated' do
       puts response.xml
       expect(response.xml).to_not be_nil
@@ -62,5 +69,24 @@ describe Boxzooka::Endpoint do
   end
 
   describe 'Orders' do
+    let(:request) { Boxzooka::OrdersRequest.new }
+
+    it { expect(response.class).to be(Boxzooka::OrdersResponse) }
+  end
+
+  describe 'InventoryAdjustmentsList' do
+    let(:request) { Boxzooka::InventoryAdjustmentsListRequest.new }
+
+    it { expect(response.class).to be(Boxzooka::InventoryAdjustmentsListResponse) }
+
+    it 'XML should be populated' do
+      puts response.xml
+      expect(response.xml).to_not be_nil
+    end
+
+    it 'should have results' do
+      expect(response.results).to_not be_nil
+      expect(response.results).to_not be_empty
+    end
   end
 end
