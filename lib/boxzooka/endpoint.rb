@@ -4,6 +4,8 @@ require 'net/http'
 module Boxzooka
   # Run requests, construct + return responses.
   class Endpoint
+    Error = Class.new(StandardError)
+
     def initialize(customer_id:, customer_key:, urls:, debug: false)
       @customer_access = Boxzooka::CustomerAccess.new(customer_id: customer_id, customer_key: customer_key)
       @urls = urls
@@ -26,11 +28,23 @@ module Boxzooka
         puts "REQUEST XML"
         puts request_xml
 
+        puts "RESPONSE CODE: #{http_response.code}"
         puts "RESPONSE XML"
         puts response_xml
       end
 
       response_klass    = response_class_for_request(request)
+
+      if http_response.code != 200
+        failure_message = "POST #{endpoint_url} Failed with #{http_response.code}"
+
+        if http_response.body && http_response.body.length > 0
+          failure_message += " \"#{http_response.body}\""
+        end
+
+        raise Error.new(failure_message)
+      end
+
       response          = deserialize(response_xml, response_klass)
 
       response.request  = request
@@ -47,7 +61,7 @@ module Boxzooka
       if url
         url
       else
-        raise NotImplementedRequest "No Response Class for #{simple_class_name}"
+        raise "No Response Class for #{simple_class_name} (did you forget to update URLs?)"
       end
     end
 
