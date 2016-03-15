@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Boxzooka::OrdersListRequest do
-  let(:date_from) { described_class.filter(filter_type: 'DateFrom', filter_value: '2016-01-01') }
-  let(:date_to)   { described_class.filter(filter_type: 'DateTo', filter_value: '2016-02-29') }
+  let(:date_from) { described_class.new_with_filters(filters: { date_from: '2016-01-01' }) }
+  let(:date_to)   { described_class.new_with_filters(filters: { date_to: '2016-02-29' }) }
 
   let(:instance) {
     described_class.new(
