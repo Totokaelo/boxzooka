@@ -1,6 +1,6 @@
 # Boxzooka API Client
 
-Are you a fashionable retailer with boxes overflowing out of your stock room? Are YOU ready to start paying someone else to be responsible for picking the black hoodie versus the charcoal one? Then this client is for you.
+Are you a fashionable retailer with boxes overflowing out of your stock room? Are YOU ready to start paying someone else to be responsible for picking the black hoodie versus the charcoal one? Then this gem's for you.
 
 ### Usage
 
@@ -30,31 +30,35 @@ Namespace is flat under `Boxzooka::`. Almost all classes inherit of `Boxzooka::B
 All requests inherit from `Boxzooka::BaseRequest`. 
 All responses inherit from `Boxzooka::BaseResponse`.
 
-### Available Requests
+### Request / Response Pairs.
 
-#### Boxzooka::CatalogRequest
+#### [Boxzooka::CatalogRequest](lib/boxzooka/catalog_request.rb) / [Boxzooka::CatalogResponse](lib/boxzooka/catalog_response.rb)
 
-Use `Boxzooka::CatalogRequest` when you need to populate Boxzooka's database with item metadata.
+Populate Boxzooka's database with item metadata.
 
-#### Boxzooka::ProductListRequest
+#### [Boxzooka::ProductListRequest](lib/boxzooka/product_list_request.rb) / [Boxzooka::ProductListResponse] (lib/boxzooka/product_list_response.rb)
 
-Use `Boxzooka::ProductList` when you need to query item metadata.
+Query item metadata.
 
-#### Boxzooka::InventoryListRequest
+### [Boxzooka::InventoryAdjustmentsRequest](lib/boxzooka/inventory_adjustments_request.rb) / [Boxzooka::InventoryAdjustmentsResponse](lib/boxzooka/inventory_adjustments_response.rb)
 
-Use `Boxzooka::InventoryListRequest` when you need to query item inventory.
+List of adjustments performed by Boxzooka.
 
-#### Boxzooka::OrdersRequest
+#### [Boxzooka::InventoryListRequest](lib/boxzooka/inventory_list_request.rb) / [Boxzooka::InventoryListResponse](lib/boxzooka/inventory_list_response.rb)
 
-Use `Boxzooka::OrdersRequest` to inform Boxzooka to ship an Order.
+Query item inventory.
 
-#### Boxzooka::OrdersListRequest
+#### [Boxzooka::OrdersRequest](lib/boxzooka/orders_request.rb) / [Boxzooka::OrdersResponse](lib/boxzooka/orders_response.rb)
 
-Use `Boxzooka::OrdersListRequest` when you need to query Order status.
+Inform Boxzooka to ship an Order.
 
-#### Boxzooka::ShipmentsListRequest
+#### [Boxzooka::OrdersListRequest](lib/boxzooka/orders_list_request.rb) / [Boxzooka::OrdersListResponse](lib/boxzooka/orders_list_response.rb)
 
-Use `Boxzooka::ShipmentsListRequest` when you need to query Shipment status.
+Query Order status.
+
+#### [Boxzooka::ShipmentsListRequest](lib/boxzooka/shipments_list_request.rb) / [Boxzooka::ShipmentsListResponse](lib/boxzooka/shipments_list_response.rb)
+
+Query Shipment status.
 
 ## TODO
 
@@ -63,8 +67,6 @@ InboundRequest, InboundCancellationRequest, InboundListRequest, InboundDiscrepan
 - Shipments – The Shipments data set is used by Boxzooka to send you confirmations of the shipments we send each day on your behalf. Each shipment record corresponds to an order record that you have sent us earlier in the Orders data set.
 
 - InventoryAdjustments – The InventoryAdjustments data set is used by Boxzooka to provide you with detailed records of when/how/why adjustments were made to your inventory within our warehouses. This data set is sent at a minimum of once per day, and more often if needed.
-
-- InventoryAdjustmentsList – The InventoryAdjustmentsList data set is used to request your list of inventory adjustments within our warehouses. InventoryAdjustmentsList requests can only be made through our API endpoint via XML. Results are limited to 300.
 
 - Returns – The Returns data set is used by Boxzooka to send you confirmations and notifications of returns, including any updated information and status. Some of these returns will have been created by you, and some will have been created by us through communications with our carrier partners.
 
