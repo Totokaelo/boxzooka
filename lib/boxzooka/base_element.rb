@@ -121,7 +121,12 @@ module Boxzooka
       #   :entry_node_name  - node name to be applied to Array entries.
       #   :flat             - when true, a container node will not be written.
       def collection(key, options = {})
-        validate_options(options, :entry_field_type, :entry_type, :entry_node_name)
+        validate_options(options, :entry_field_type, :entry_node_name)
+
+        unless options[:entry_field_type] == FieldTypes::SCALAR
+          validate_options(options, :entry_type)
+        end
+
         define_field(key, options.merge(field_type: FieldTypes::COLLECTION))
       end
 
@@ -161,7 +166,7 @@ module Boxzooka
       def validate_options(options, *keys)
         keys.each do |key|
           unless options.has_key?(key)
-            raise ArgumentError.new("#{key} required")
+            raise ArgumentError.new("#{key} required for #{self.name}")
           end
         end
       end
