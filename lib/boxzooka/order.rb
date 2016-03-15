@@ -23,6 +23,7 @@ module Boxzooka
     # International commercial terms of shipment (DDU or DDP), defaults to DDU
     scalar :incoterms
 
+    # Items on the Order.
     collection :items,
       flat: true,
       entry_field_type: :entity,

@@ -74,6 +74,14 @@ describe Boxzooka::Endpoint do
     it { expect(response.class).to be(Boxzooka::OrdersResponse) }
   end
 
+  describe 'OrdersList', :focus do
+    let(:request) { Boxzooka::OrdersListRequest.new }
+
+    it { expect(response.class).to be(Boxzooka::OrdersListResponse) }
+
+    # We'll need some Orders in the Boxzooka db before this will return anything!
+  end
+
   describe 'InventoryAdjustmentsList' do
     let(:request) { Boxzooka::InventoryAdjustmentsListRequest.new }
 

@@ -31,6 +31,7 @@ require 'boxzooka/orders_request'
 require 'boxzooka/orders_response'
 
 require 'boxzooka/orders_list_request'
+require 'boxzooka/orders_list_response'
 
 require 'boxzooka/order_cancellation_request'
 

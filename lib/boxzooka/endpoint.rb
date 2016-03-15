@@ -35,7 +35,7 @@ module Boxzooka
 
       response_klass    = response_class_for_request(request)
 
-      if http_response.code != 200
+      if http_response.code.to_i != 200
         failure_message = "POST #{endpoint_url} Failed with #{http_response.code}"
 
         if http_response.body && http_response.body.length > 0
