@@ -1,6 +1,6 @@
 # Boxzooka API Client
 
-Are you a fashionable retailer with boxes overflowing out of your stock room? Are YOU ready to start paying someone else to be responsible for picking the black hoodie versus the charcoal one? Then this client is for you.
+Are you a fashionable retailer with boxes overflowing out of your stock room? Are YOU ready to start paying someone else to be responsible for picking the black hoodie versus the charcoal one? Then this gem's for you.
 
 ### Usage
 
