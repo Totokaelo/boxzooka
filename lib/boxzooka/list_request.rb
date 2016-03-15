@@ -18,7 +18,9 @@ module Boxzooka
       end
 
       # Create a ListRequest with filters.
-      def new_with_filters(filters_hash)
+      def new_with_filters(options)
+        filters_hash = options[:filters]
+
         # Complain if there are any unknown keys.
         unknown_keys = filters_hash.keys.reject { |key| filters.has_key?(key) }
 
@@ -34,16 +36,16 @@ module Boxzooka
         filters_array = filters_hash.map do |filter_name, filter_value|
           # TODO: we shouldn't do this here (conversion should really only happen on the way out)
           # but I'm not sure where else to put it.
-          options = filters[filter_name]
+          filter_options = filters[filter_name]
 
           ListFilter.new(
-            filter_type:  options[:node_name] || Boxzooka::StringUtils.camelize(filter_name),
+            filter_type:  filter_options[:node_name] || Boxzooka::StringUtils.camelize(filter_name),
             filter_value: filter_value
           )
         end
 
         # Construct the ListRequest
-        new(filters: filters_array)
+        new(options.merge(filters: filters_array))
       end
 
       private

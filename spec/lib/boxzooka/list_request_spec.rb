@@ -9,13 +9,23 @@ describe Boxzooka::ListRequest do
   describe 'filter definition and construction' do
     let(:simple_filter_value) { 'ABC' }
     let(:another_filter_value) { 'DEF' }
+    let(:skip_count) { (rand * 10).floor }
+
 
     subject {
       DerivedClass.new_with_filters(
-        a_simple_filter: simple_filter_value,
-        another_filter: another_filter_value
+        skip_count: skip_count,
+
+        filters: {
+          a_simple_filter: simple_filter_value,
+          another_filter: another_filter_value
+        }
       )
     }
+
+    it 'should pass other arguments through' do
+      expect(subject.skip_count).to be(skip_count)
+    end
 
     it 'should set simple filters' do
       simple_list_filter = Boxzooka::ListFilter.new(
