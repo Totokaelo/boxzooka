@@ -26,7 +26,7 @@ module Boxzooka
 
         if unknown_keys.any?
           complaint_string =  "Could not create #{self.class.name} with unknown filter names " \
-                              "(#{unknown.keys.join(', ')}). " \
+                              "(#{unknown_keys.join(', ')}). " \
                               "Available options: (#{filters.keys.join(', ')})"
 
           raise ArgumentError.new(complaint_string)
