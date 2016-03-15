@@ -40,7 +40,7 @@ Populate Boxzooka's database with item metadata.
 
 Query item metadata.
 
-### [Boxzooka::InventoryAdjustmentsRequest](lib/boxzooka/inventory_adjustments_request.rb) / [Boxzooka::InventoryAdjustmentsResponse](lib/boxzooka/inventory_adjustments_response.rb)
+### [Boxzooka::InventoryAdjustmentsListRequest](lib/boxzooka/inventory_adjustments_list_request.rb) / [Boxzooka::InventoryAdjustmentsListResponse](lib/boxzooka/inventory_adjustments_list_response.rb)
 
 List of adjustments performed by Boxzooka.
 
