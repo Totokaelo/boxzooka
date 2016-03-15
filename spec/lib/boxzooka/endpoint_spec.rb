@@ -31,10 +31,9 @@ describe Boxzooka::Endpoint do
     let(:request) { Boxzooka::CatalogRequest.new(items: [item1]) }
 
     it { expect(response.class).to be(Boxzooka::CatalogResponse) }
-
-    it 'XML should be populated' do
-      expect(response.xml).to_not be_nil
-    end
+    it { expect(response.xml).to_not be_nil }
+    it { expect(response.http_response).to_not be_nil }
+    it { expect(response.request).to_not be_nil }
   end
 
   describe 'ProductList' do
@@ -74,7 +73,7 @@ describe Boxzooka::Endpoint do
     it { expect(response.class).to be(Boxzooka::OrdersResponse) }
   end
 
-  describe 'OrdersList', :focus do
+  describe 'OrdersList' do
     let(:request) { Boxzooka::OrdersListRequest.new }
 
     it { expect(response.class).to be(Boxzooka::OrdersListResponse) }

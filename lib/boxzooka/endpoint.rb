@@ -33,7 +33,7 @@ module Boxzooka
         puts response_xml
       end
 
-      response_klass    = response_class_for_request(request)
+      response_klass = response_class_for_request(request)
 
       if http_response.code.to_i != 200
         failure_message = "POST #{endpoint_url} Failed with #{http_response.code}"
@@ -45,10 +45,8 @@ module Boxzooka
         raise Error.new(failure_message)
       end
 
-      response          = deserialize(response_xml, response_klass)
-
-      response.request  = request
-      response.xml      = response_xml
+      response = deserialize(response_xml, response_klass)
+      response.assign_http_variables(request, http_response, response_xml)
 
       response
     end
@@ -83,7 +81,6 @@ module Boxzooka
 
       request = Net::HTTP::Post.new(uri)
       request.body = request_xml
-      # request['Content-Type'] = 'application/xml'
 
       response = Net::HTTP.start(
         uri.hostname,
