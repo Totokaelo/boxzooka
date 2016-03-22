@@ -41,7 +41,7 @@ module Boxzooka
     filter :method
 
     # Unique ID of order
-    filter :order_id, node_name: 'OrderId'
+    filter :order_id, node_name: 'OrderID'
 
     # Phone number of recipient
     filter :phone
