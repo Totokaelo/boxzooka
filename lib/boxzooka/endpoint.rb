@@ -1,15 +1,17 @@
 require 'uri'
 require 'net/http'
+require 'logger'
 
 module Boxzooka
   # Run requests, construct + return responses.
   class Endpoint
     Error = Class.new(StandardError)
 
-    def initialize(customer_id:, customer_key:, urls:, debug: false)
+    def initialize(customer_id:, customer_key:, urls:, debug: false, logger: nil)
       @customer_access = Boxzooka::CustomerAccess.new(customer_id: customer_id, customer_key: customer_key)
       @urls = urls
       @debug = debug
+      @logger = logger || Logger.new(STDOUT)
     end
 
     # Run the request.
@@ -25,12 +27,12 @@ module Boxzooka
                           sub("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n", '')
 
       if @debug
-        puts "REQUEST XML"
-        puts request_xml
+        @logger.debug "REQUEST XML"
+        @logger.debug request_xml
 
-        puts "RESPONSE CODE: #{http_response.code}"
-        puts "RESPONSE XML"
-        puts response_xml
+        @logger.debug "RESPONSE CODE: #{http_response.code}"
+        @logger.debug "RESPONSE XML"
+        @logger.debug response_xml
       end
 
       response_klass = response_class_for_request(request)
