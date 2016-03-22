@@ -1,3 +1,5 @@
+require 'boxzooka/list_request'
+
 module Boxzooka
   class InventoryAdjustmentsListRequest < ListRequest
     root node_name: 'InventoryAdjustmentsList'
