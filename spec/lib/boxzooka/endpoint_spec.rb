@@ -4,6 +4,7 @@ describe Boxzooka::Endpoint do
   let(:customer_id) { ENV['BOXZOOKA_CUSTOMER_ID'] }
   let(:customer_key) { ENV['BOXZOOKA_CUSTOMER_KEY'] }
 
+  let(:hostname) { 'sandbox3.boxzooka.com' }
   let(:urls) {
     {
       'CatalogRequest'                  => 'https://sandbox3.boxzooka.com/productsapi',
@@ -21,7 +22,7 @@ describe Boxzooka::Endpoint do
     }
   }
 
-  let(:endpoint) { described_class.new(customer_id: customer_id, customer_key: customer_key, urls: urls, debug: true) }
+  let(:endpoint) { described_class.new(customer_id: customer_id, customer_key: customer_key, hostname: hostname, debug: true) }
   let(:response)  { endpoint.execute(request) }
 
   describe 'Catalog' do

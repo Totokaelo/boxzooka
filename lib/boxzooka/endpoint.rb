@@ -2,14 +2,16 @@ require 'uri'
 require 'net/http'
 require 'logger'
 
+require 'boxzooka/endpoint_urls'
+
 module Boxzooka
   # Run requests, construct + return responses.
   class Endpoint
     Error = Class.new(StandardError)
 
-    def initialize(customer_id:, customer_key:, urls:, debug: false, logger: nil)
+    def initialize(customer_id:, customer_key:, hostname:, debug: false, logger: nil)
       @customer_access = Boxzooka::CustomerAccess.new(customer_id: customer_id, customer_key: customer_key)
-      @urls = urls
+      @urls = Boxzooka::EndpointUrls.new(hostname)
       @debug = debug
       @logger = logger || Logger.new(STDOUT)
     end
@@ -55,8 +57,7 @@ module Boxzooka
 
     # Return the endpoint URL for request.
     def url_for_request(request)
-      simple_class_name = request.class.name.split('::').last
-      url = @urls[simple_class_name]
+      url = @urls.url_for_request(request)
 
       if url
         url
