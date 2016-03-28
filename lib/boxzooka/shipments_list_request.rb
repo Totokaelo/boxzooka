@@ -49,6 +49,9 @@ module Boxzooka
     # Province of recipient.
     filter :province
 
+    # Related Order.
+    filter :order_id, node_name: 'OrderID'
+
     # Minimum date of when the order data was sent / received
     filter :order_date_from
 

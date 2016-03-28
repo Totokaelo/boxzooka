@@ -28,7 +28,7 @@ module Boxzooka
 
       when ProductListRequest               then 'productlistapi'
 
-      when ReturnNotificationRequest        then 'returnnotificationapi'
+      when ReturnsNotificationRequest       then 'returnnotificationapi'
       when ReturnsListRequest               then 'returnslistapi'
 
       when ShipmentBillingListRequest       then 'shipmentbillinglistapi'

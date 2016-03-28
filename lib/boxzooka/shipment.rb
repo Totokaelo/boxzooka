@@ -7,7 +7,7 @@ module Boxzooka
     # Required for int'l Orders
     scalar :customs_description
 
-    # Unique code to identify the consolidation in which the shipment was included.
+    # Identifies the consolidation in which the shipment was included.
     scalar :consolidation_id, node_name: 'ConsolidationID'
 
     # Cost of shipment.
