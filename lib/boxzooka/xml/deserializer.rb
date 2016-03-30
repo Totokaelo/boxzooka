@@ -28,10 +28,9 @@ module Boxzooka
 
       attr_reader :root_node, :klass
 
-      def build_object
-        object = klass.new
-        nodes = root_node.nodes
-
+      # Deserialize all entities, and add to object.
+      # If a scalar is not present it will be nil.
+      def add_scalar_fields_to_object(object, nodes)
         scalar_fields.each do |field_name|
           node_name = field_node_name(field_name)
           node = nodes.find { |n| n.value == node_name }
@@ -44,7 +43,11 @@ module Boxzooka
 
           object.send("#{field_name}=", node.text)
         end
+      end
 
+      # Deserialize all entities, and add to object.
+      # If an entity is not present it will be nil.
+      def add_entity_fields_to_object(object, nodes)
         entity_fields.each do |field_name|
           node_name = field_node_name(field_name)
           field_class = field_class(field_name)
@@ -52,9 +55,17 @@ module Boxzooka
           node = nodes.find { |n| n.value == node_name }
           next unless node
 
-          object.send("#{field_name}=", Xml.deserialize(Ox.dump(node), field_class))
-        end
+          entity = Xml.deserialize(Ox.dump(node), field_class)
 
+          object.send("#{field_name}=", entity)
+        end
+      end
+
+      # Deserialize all collections and add to object.
+      #
+      # If a collection is not present it will be added as an empty Array,
+      # which differs from the other behaviors but simplifies usage later.
+      def add_collection_fields_to_object(object, nodes)
         collection_fields.each do |field_name|
           node_name = field_node_name(field_name)
           entry_node_name = entry_node_name(field_name)
@@ -75,8 +86,6 @@ module Boxzooka
                           []
                         end
 
-          next unless entry_nodes.any?
-
           array = if entry_field_type == FieldTypes::SCALAR
             entry_nodes.map { |n| cast_scalar(n.text, entry_type) }
           else
@@ -87,6 +96,15 @@ module Boxzooka
 
           object.send("#{field_name}=", array)
         end
+      end
+
+      def build_object
+        object = klass.new
+        nodes = root_node.nodes
+
+        add_scalar_fields_to_object(object, nodes)
+        add_entity_fields_to_object(object, nodes)
+        add_collection_fields_to_object(object, nodes)
 
         object
       end
