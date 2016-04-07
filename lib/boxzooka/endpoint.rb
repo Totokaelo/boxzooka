@@ -29,11 +29,10 @@ module Boxzooka
                           sub("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n", '')
 
       if @debug
-        @logger.debug "REQUEST XML"
+        @logger.debug "REQUEST\tPOST #{endpoint_url} XML"
         @logger.debug request_xml
 
-        @logger.debug "RESPONSE CODE: #{http_response.code}"
-        @logger.debug "RESPONSE XML"
+        @logger.debug "RESPONSE\t#{http_response.code} XML"
         @logger.debug response_xml
       end
 
