@@ -34,6 +34,7 @@ require 'boxzooka/orders_list_request'
 require 'boxzooka/orders_list_response'
 
 require 'boxzooka/order_cancellation_request'
+require 'boxzooka/order_cancellation_response'
 
 require 'boxzooka/product_list_request'
 require 'boxzooka/product_list_response'

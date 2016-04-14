@@ -68,7 +68,7 @@ describe Boxzooka::Endpoint do
     end
   end
 
-  describe 'Orders' do
+  describe 'Create Orders' do
     let(:request) { Boxzooka::OrdersRequest.new }
 
     it { expect(response.class).to be(Boxzooka::OrdersResponse) }

@@ -2,7 +2,10 @@ require 'boxzooka/order'
 require 'boxzooka/orders_list_response_item'
 
 module Boxzooka
+  # Order object on the OrdersList Request.
   class OrdersListResponseOrder < Order
+    root node_name: 'Order'
+
     # Notes regarding hold_status.
     scalar :hold_notes
 

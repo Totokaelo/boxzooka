@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe Boxzooka::OrderCancellationRequest do
-
   let(:instance) {
     described_class.new(
       customer_access: Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc'),
-      order_id: 'TKTESTO0001',
+      order_ids: ['TKTESTO0001'],
       delete: 'Y'
     )
   }
