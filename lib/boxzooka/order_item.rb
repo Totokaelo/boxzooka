@@ -3,6 +3,18 @@ module Boxzooka
     # Necessary for customs classification.
     scalar :description
 
+    # Notes regarding hold_status.
+    # ONLY returned by Boxzooka, ie writing to this does nothing.
+    scalar :hold_notes
+
+    # Status of a hold on the item, if applicable.
+    # ONLY returned by Boxzooka, ie writing to this does nothing.
+    scalar :hold_status
+
+    # Status of the Item.
+    # ONLY returned by Boxzooka, ie writing to this does nothing.
+    scalar :item_status
+
     # Url of product. Recommended if unit value is different from the value declared when
     # sending this product’s information in the Products data set.
     scalar :product_url

@@ -1,5 +1,4 @@
 require 'boxzooka/order'
-require 'boxzooka/orders_list_response_item'
 
 module Boxzooka
   # Order object on the OrdersList Request.
@@ -17,5 +16,33 @@ module Boxzooka
 
     # Notes regarding status.
     scalar :order_notes
+
+    def cancelled?
+      status == 'cancelled'
+    end
+
+    def on_hold?
+      status == 'on_hold'
+    end
+
+    def packing?
+      status == 'packing'
+    end
+
+    def picking?
+      status == 'picking'
+    end
+
+    def processed_xml_request?
+      status == 'processed_xml_request'
+    end
+
+    def shipment_created?
+      status == 'shipment_created'
+    end
+
+    def shipped?
+      status == 'shipped'
+    end
   end
 end
