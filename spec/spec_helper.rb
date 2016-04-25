@@ -1,5 +1,6 @@
 require 'boxzooka'
 require 'factory_girl'
+require 'boxzooka_spec_helper'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -17,4 +18,8 @@ RSpec.configure do |config|
 
   FactoryGirl.definition_file_paths = [File.expand_path('../factories', __FILE__)]
   FactoryGirl.find_definitions
+
+  # Include useful helpers
+  config.include BoxzookaSpecHelper
 end
+

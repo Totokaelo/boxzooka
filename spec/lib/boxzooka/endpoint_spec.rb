@@ -1,28 +1,7 @@
 require 'spec_helper'
 
 describe Boxzooka::Endpoint do
-  let(:customer_id) { ENV['BOXZOOKA_CUSTOMER_ID'] }
-  let(:customer_key) { ENV['BOXZOOKA_CUSTOMER_KEY'] }
-
-  let(:hostname) { 'sandbox3.boxzooka.com' }
-  let(:urls) {
-    {
-      'CatalogRequest'                  => 'https://sandbox3.boxzooka.com/productsapi',
-      'ProductListRequest'              => 'https://sandbox3.boxzooka.com/productlistapi',
-      'InboundRequest'                  => 'https://sandbox3.boxzooka.com/inboundapi',
-      'InboundCancellationRequest'      => 'https://sandbox3.boxzooka.com/inboundcancelapi',
-      'InboundListRequest'              => 'https://sandbox3.boxzooka.com/inboundlistapi',
-      'InboundDiscrepancyListRequest'   => 'https://sandbox3.boxzooka.com/inbounddiscrepancyapi',
-      'InventoryListRequest'            => 'https://sandbox3.boxzooka.com/inventorylistapi',
-      'OrdersRequest'                   => 'https://sandbox3.boxzooka.com/ordersapi',
-      'OrderCancellationRequest'        => 'https://sandbox3.boxzooka.com/ordercancelapi',
-      'OrdersListRequest'               => 'https://sandbox3.boxzooka.com/orderlistapi',
-      'ReturnNotificationRequest'       => 'https://sandbox3.boxzooka.com/returnnotificationapi',
-      'InventoryAdjustmentsListRequest' => 'https://sandbox3.boxzooka.com/inventoryadjustmentsapi'
-    }
-  }
-
-  let(:endpoint) { described_class.new(customer_id: customer_id, customer_key: customer_key, hostname: hostname, debug: true) }
+  let(:endpoint) { boxzooka_endpoint }
   let(:response)  { endpoint.execute(request) }
 
   describe 'Catalog' do
