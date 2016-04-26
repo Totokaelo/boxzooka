@@ -1,7 +1,6 @@
 module Boxzooka
+  # Line Items for the InboundRequest.
   class InboundRequestItem < Item
-    #root node_name: 'Item'
-
     # Quantity of inbound product.
     scalar :quantity
   end

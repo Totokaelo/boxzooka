@@ -1,7 +1,11 @@
 require 'boxzooka/inbound_request_item'
 
 module Boxzooka
-  # Inbound data set is used to send notifications to our system of product inventory that you’re sending to our warehouse.
+  # Inbound data set is used to send notifications to our system of product inventory
+  # that you’re sending to Boxzooka.
+
+  # In practice, you must hit a CatalogRequest for all of the items listed here before the Inbound
+  # will be created.
   class InboundRequest < BaseRequest
     root node_name: 'Inbound'
 
