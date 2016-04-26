@@ -1,14 +1,14 @@
 module Boxzooka
   # Response Items from Boxzooka for CatalogRequest.
   class CatalogResponseItem < BaseElement
-    # SKU of the Item.
-    scalar :sku
+    # Error message. Can be blank when Status == 'Success'
+    scalar :error_message
 
     # Status. Either 'Success' or 'Error'.
     scalar :status
 
-    # Error message. Can be blank when Status == 'Success'
-    scalar :error_message
+    # SKU of the Item.
+    scalar :sku
 
     def success?
       [
