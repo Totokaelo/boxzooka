@@ -4,7 +4,7 @@ module Boxzooka
   # Response to the Inbound request.
   class InboundResponse < BaseResponse
     # Error Message populated if ItemStatus == 'Error'.
-    scalar :error_messoge
+    scalar :error_message
 
     # PO Identifier.
     scalar :po, node_name: 'PO'
