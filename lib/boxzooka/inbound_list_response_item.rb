@@ -1,7 +1,7 @@
 module Boxzooka
   # 'Item' elements on the InboundListResponse.
   class InboundListResponseItem < BaseElement
-    node_name: 'Item'
+    root node_name: 'Item'
 
     # Inbound-specific description of item.
     scalar :description

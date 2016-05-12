@@ -1,6 +1,8 @@
 module Boxzooka
   # Line Items for the InboundRequest.
   class InboundRequestItem < BaseElement
+    root node_name: 'Item'
+
     # Inbound-specific description of item.
     scalar :description
 
