@@ -53,6 +53,9 @@ module Boxzooka
     # Order Value
     scalar :order_value, type: :decimal
 
+    # Order Type. Either 'fulfillment' or 'cross_dock'.
+    scalar :order_type
+
     # Address to ship to
     entity :ship_to, type: Boxzooka::Address
 
