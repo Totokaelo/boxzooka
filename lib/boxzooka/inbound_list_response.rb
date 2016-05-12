@@ -1,6 +1,8 @@
+require 'boxzooka/inbound_list_response_inbound'
+
 module Boxzooka
   # Response to the InboundList Request.
-  class InboundListResponse < ListResponse
+  class InboundListResponse < BaseResponse
     collection :results,
       entry_field_type: :entity,
       entry_node_name: 'Inbound',

@@ -1,3 +1,5 @@
+require 'boxzooka/inbound_list_response_item'
+
 module Boxzooka
   # The "Inbound" object on InboundListResponses.
   # Not the most descriptive name, but fits with our naming hierarchy for now.
