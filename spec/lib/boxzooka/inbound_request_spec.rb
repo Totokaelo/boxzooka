@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Boxzooka::InboundRequest do
   let(:item) {
-    Boxzooka::InboundRequestItem.new(sku: 'ITEM001', description: 'Cool black hat', quantity: 5)
+    Boxzooka::InboundRequestItem.new(sku: 'ITEM001', description: 'Cool black hat', quantity: 5, upc_vendor_barcode: 'ABX-123-555-YY')
   }
 
   let(:item_b) {
-    Boxzooka::InboundRequestItem.new(sku: 'ITEM002', description: 'Cool white hat', quantity: 10)
+    Boxzooka::InboundRequestItem.new(sku: 'ITEM002', description: 'Cool white hat', quantity: 10, upc_vendor_barcode: 'ABX-123-555-XX')
   }
 
   let(:instance) {

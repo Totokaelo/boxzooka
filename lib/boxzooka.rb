@@ -18,6 +18,8 @@ require 'boxzooka/inbound_cancellation_response'
 require 'boxzooka/inbound_discrepancy_list_request'
 
 require 'boxzooka/inbound_list_request'
+require 'boxzooka/inbound_list_response'
+
 require 'boxzooka/inbound_request'
 require 'boxzooka/inbound_response'
 
