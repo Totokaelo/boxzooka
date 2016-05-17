@@ -10,10 +10,10 @@ module Boxzooka
     scalar :item_status
 
     # Quantity of inbound product.
-    scalar :quantity
+    scalar :quantity, type: :integer
 
     # Received units
-    scalar :received
+    scalar :received, type: :integer
 
     # Inbound-specific short description of item.
     scalar :short_description
