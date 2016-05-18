@@ -59,6 +59,9 @@ module Boxzooka
     # Address to ship to
     entity :ship_to, type: Boxzooka::Address
 
+    # Signature directive. Currently only 'Required'.
+    scalar :signature
+
     # Special instructions, note to customer, etc. This is an arbitrary field
     # used to specify information be to printed on the packing slip.
     scalar :slip_note
