@@ -59,7 +59,7 @@ module Boxzooka
     # Address to ship to
     entity :ship_to, type: Boxzooka::Address
 
-    # Signature directive. Currently only 'Required'.
+    # Signature directive. Either 'Indirect' or 'Required'.
     scalar :signature
 
     # Special instructions, note to customer, etc. This is an arbitrary field
