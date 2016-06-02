@@ -1,16 +1,17 @@
 require 'spec_helper'
 
 describe Boxzooka::ListRequest do
-  class DerivedClass < described_class
-    filter :a_simple_filter
-    filter :another_filter, node_name: 'AnotherFilterTwo'
+  before(:all) do
+    class DerivedClass < described_class
+      filter :a_simple_filter
+      filter :another_filter, node_name: 'AnotherFilterTwo'
+    end
   end
 
   describe 'filter definition and construction' do
     let(:simple_filter_value) { 'ABC' }
     let(:another_filter_value) { 'DEF' }
     let(:skip_count) { (rand * 10).floor }
-
 
     subject {
       DerivedClass.new_with_filters(

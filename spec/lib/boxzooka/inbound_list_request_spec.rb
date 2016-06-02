@@ -5,8 +5,7 @@ describe Boxzooka::InboundListRequest do
 
   let(:instance) {
     described_class.new(
-      customer_access: Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc'),
-      filters: [filter]
+      customer_access: Boxzooka::CustomerAccess.new(customer_id: 123, customer_key: 'abc')
     )
   }
 

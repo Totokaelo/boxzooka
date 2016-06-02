@@ -16,6 +16,12 @@ module Boxzooka
     # API Version.
     scalar :version
 
+    # Status message, often blank but may contain 'Error'.
+    scalar :status
+
+    # Generally populated when status contains 'Error'.
+    scalar :error_message
+
     # Assign some readonly variables. This should only be called by the Endpoint during
     # construction of the Response.
     def assign_http_variables(request, http_response, xml)
