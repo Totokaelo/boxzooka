@@ -11,6 +11,9 @@ module Boxzooka
     # ONLY returned by Boxzooka, ie writing to this does nothing.
     scalar :hold_status
 
+    # Amount "saved" on the item.
+    scalar :item_discount, type: :decimal
+
     # Status of the Item.
     # ONLY returned by Boxzooka, ie writing to this does nothing.
     scalar :item_status

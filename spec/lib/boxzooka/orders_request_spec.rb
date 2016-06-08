@@ -1,20 +1,7 @@
 require 'spec_helper'
 
 describe Boxzooka::OrdersRequest do
-  let(:address) {
-    Boxzooka::Address.new(
-      first_name: 'Quinton',
-      last_name: 'Harris',
-      company: 'Totokaelo',
-      address1: '1523 10th Ave',
-      city: 'Seattle',
-      province: 'WA',
-      country_code: 'US',
-      phone: '1 (844) 868-6523',
-      email: 'quinton@totokaelo.com',
-      tax_id: 'ABC123456'
-    )
-  }
+  let(:address) { FactoryGirl.build(:address) }
 
   let(:item) {
     Boxzooka::OrderItem.new(
@@ -29,6 +16,8 @@ describe Boxzooka::OrdersRequest do
     )
   }
 
+  let(:sale_item) { FactoryGirl.build(:order_item, item_discount: 50.00) }
+
   let(:order) {
     Boxzooka::Order.new(
       cancel_date: DateTime.new(2022, 9, 1),
@@ -37,7 +26,7 @@ describe Boxzooka::OrdersRequest do
       carrier_method: 'PRIORITY',
       customs_description: 'Wool Hat',
       incoterms: 'DDP',
-      items: [item],
+      items: [item, sale_item],
       label_note: 'Fragile',
       order_currency: 'USD',
       order_date: DateTime.new(2016, 2, 16),
