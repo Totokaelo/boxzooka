@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
 
   # Dependencies
   s.add_development_dependency 'rspec', '~> 3.2'
+  s.add_development_dependency 'rspec-its'
   s.add_development_dependency 'guard-rspec', '~> 4'
   s.add_development_dependency 'factory_girl', '~> 4'
 

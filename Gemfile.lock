@@ -64,6 +64,9 @@ GEM
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
+    rspec-its (1.2.0)
+      rspec-core (>= 3.0.0)
+      rspec-expectations (>= 3.0.0)
     rspec-mocks (3.4.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
@@ -83,6 +86,7 @@ DEPENDENCIES
   factory_girl (~> 4)
   guard-rspec (~> 4)
   rspec (~> 3.2)
+  rspec-its
 
 BUNDLED WITH
    1.11.2
