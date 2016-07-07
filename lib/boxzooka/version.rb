@@ -1,3 +1,3 @@
 module Boxzooka
-  VERSION = '0.0.1.493'
+  VERSION = '0.0.1.494'
 end
