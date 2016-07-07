@@ -31,6 +31,9 @@ require 'boxzooka/inventory_adjustments_list_response'
 
 require 'boxzooka/item'
 
+require 'boxzooka/landed_quote_request'
+require 'boxzooka/landed_quote_response'
+
 require 'boxzooka/orders_request'
 require 'boxzooka/orders_response'
 
