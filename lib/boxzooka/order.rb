@@ -23,8 +23,14 @@ module Boxzooka
     # International commercial terms of shipment (DDU or DDP), defaults to DDU
     scalar :incoterms
 
-    # Discount applied to the Order.
+    # Discount applied to the Order. For purposes of invoice.
     scalar :invoice_discount, type: :decimal
+
+    # Shipping amount. For purposes of invoice.
+    scalar :invoice_shipping, type: :decimal
+
+    # Tax applied to the Order. For purposes of invoice.
+    scalar :invoice_tax, type: :decimal
 
     # Items on the Order.
     collection :items,
