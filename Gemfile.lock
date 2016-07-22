@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    boxzooka (0.0.1.495)
+    boxzooka (0.0.1.496)
       builder (~> 3)
       ox (~> 2)
 

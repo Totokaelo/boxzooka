@@ -16,6 +16,9 @@ module Boxzooka
     # Shipping method for specified carrier. Required if Carrier field has value.
     scalar :carrier_method
 
+    # Id of 'sibling' Order to be combined with.
+    scalar :combine_with
+
     # Concise description of entire order contents, to be provided to customs.
     # Required for int'l Orders
     scalar :customs_description
