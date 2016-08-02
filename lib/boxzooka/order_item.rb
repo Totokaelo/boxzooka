@@ -1,5 +1,13 @@
+require 'boxzooka/attribute'
+
 module Boxzooka
   class OrderItem < BaseElement
+    collection :attributes,
+      flat: true,
+      entry_field_type: :entity,
+      entry_type: Attribute,
+      entry_node_name: 'Attribute'
+
     # Necessary for customs classification.
     scalar :description
 

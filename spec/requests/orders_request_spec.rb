@@ -17,8 +17,15 @@ describe Boxzooka::OrdersRequest, :requests do
 
   context 'sale orders' do
     let(:sale_item) { FactoryGirl.build(:order_item, item_discount: 25) }
+    let(:final_sale_item) {
+      FactoryGirl.build(
+        :order_item,
+        attributes: [Boxzooka::Attribute.new(name: 'FinalSale', value: 'TRUE')],
+        item_discount: 80
+      )
+    }
     let(:full_price_item) { FactoryGirl.build(:order_item) }
-    let(:items) { [sale_item, full_price_item] }
+    let(:items) { [sale_item, final_sale_item, full_price_item] }
 
     let(:request) {
       Boxzooka::OrdersRequest.new(
