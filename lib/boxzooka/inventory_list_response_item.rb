@@ -8,6 +8,13 @@ module Boxzooka
     scalar :quantity_ready,
       type: :integer
 
+    # Product quantity allocated to existing, unshipped Orders.
+    scalar :quantity_alloc,
+      type: :integer
+
+    # Product quantity available for allocation. (quantity_ready - quantity_alloc)
+    scalar :quantity_avail,
+      type: :integer
 
     # Product SKU - Unique identifier for each product.
     scalar :sku,
