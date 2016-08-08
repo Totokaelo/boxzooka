@@ -20,5 +20,8 @@ module Boxzooka
 
     # Id of warehouse where inventory is located.
     filter :warehouse_id, node_name: 'WarehouseID'
+
+    # If set to TRUE, populates a couple extra fields. You want these.
+    scalar :show_details
   end
 end
