@@ -188,6 +188,8 @@ module Boxzooka
     end
 
     def ==(rhs)
+      return false if rhs.nil?
+
       self.class.field_names.all? do |field_name|
         self.send(field_name) == rhs.send(field_name)
       end
