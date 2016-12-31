@@ -17,7 +17,9 @@ module Boxzooka
 
     # Status of a hold on the item, if applicable.
     # ONLY returned by Boxzooka, ie writing to this does nothing.
-    scalar :hold_status
+    scalar :item_hold_status
+
+    alias hold_status item_hold_status
 
     # Amount "saved" on the item.
     scalar :item_discount, type: :decimal
